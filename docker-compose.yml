@@ -1,0 +1,7 @@
+version: "3.11"
+
+services:
+  telegram_bot:
+    restart: always
+    build: .
+
