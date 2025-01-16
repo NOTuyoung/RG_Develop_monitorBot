@@ -1,8 +1,1 @@
-2025-01-15 19:53:25,723 - INFO - Бот запущен и готов к работе
-2025-01-15 19:53:25,724 - INFO - Start polling
-2025-01-15 19:53:26,302 - INFO - Run polling for bot @RgDevelop_monitor_bot id=7585576606 - 'RgDevelop_monitor'
-2025-01-15 19:53:30,842 - INFO - Сообщение из чата -1002373431113 переслано в -1002392400754 (тема 10)
-2025-01-15 19:53:30,843 - INFO - Update id=297907364 is handled. Duration 538 ms by bot id=7585576606
-2025-01-15 19:58:06,088 - WARNING - Received SIGINT signal
-2025-01-15 19:58:06,095 - INFO - Polling stopped for bot @RgDevelop_monitor_bot id=7585576606 - 'RgDevelop_monitor'
-2025-01-15 19:58:06,096 - INFO - Polling stopped
+
