@@ -56,7 +56,7 @@ async def process_queue():
                         "chat_id": message_data["target_chat_id"],
                         "text": message.text or "",
                         "message_thread_id": message_data.get("message_thread_id"),
-                        "parse_mode": "HTML" # Проверяем, есть ли thread_id
+                        "parse_mode": "MarkdownV2" # Проверяем, есть ли thread_id
                     }
                 )
                 print(f"Сообщение переслано в {message_data['target_chat_id']}")
