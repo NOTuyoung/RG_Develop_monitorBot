@@ -48,6 +48,7 @@ async def process_queue():
                     chat_id=message_data["source_chat_id"],
                     message_ids=message_data["message_id"]
                 )
+                print(message.html_text)
 
                 await bot.send_message(
                         chat_id = message_data["target_chat_id"],
