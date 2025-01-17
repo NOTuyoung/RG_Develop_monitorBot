@@ -44,37 +44,22 @@ async def process_queue():
         message_data = await message_queue.get()
         if message_data:
             try:
-                # Получаем сообщение из Userbot
                 message = await userbot.get_messages(
                     chat_id=message_data["source_chat_id"],
                     message_ids=message_data["message_id"]
                 )
 
-                # Проверяем текст сообщения
-                if message.text:
-                    text = message.text
-                elif message.caption:
-                    text = message.caption
-                else:
-                    text = ""
-
-                # Обрабатываем сущности, если они есть
-                if message.entities:
-                    text = message.get_formatted_text(parse_mode="html")
-
-                # Отправляем сообщение через бота
                 await bot.send_message(
-                    chat_id=message_data["target_chat_id"],
-                    text=text,
-                    message_thread_id=message_data.get("message_thread_id"),
-                    parse_mode="HTML"  # Указываем режим HTML для корректной обработки ссылок
+                        chat_id = message_data["target_chat_id"],
+                        text = message.text or "",
+                        message_thread_id = message_data.get("message_thread_id"),
+                        parse_mode = "HTML"
                 )
                 print(f"Сообщение переслано в {message_data['target_chat_id']}")
-
             except Exception as e:
                 print(f"Ошибка при пересылке сообщения: {e}")
         message_queue.task_done()
-        
+
 # Запуск Userbot и Bot
 if __name__ == "__main__":
     print("Запуск Userbot и Bot...")
