@@ -44,17 +44,24 @@ async def process_queue():
         message_data = await message_queue.get()
         if message_data:
             try:
-                # Пересылка сообщения без указания message_thread_id
                 message = await userbot.get_messages(
                     chat_id=message_data["source_chat_id"],
                     message_ids=message_data["message_id"]
                 )
 
+                # Проверяем наличие текста и ссылок
+                text = message.text or message.caption or ""
+                entities = message.entities or message.caption_entities
+
+                if entities:
+                    # Преобразуем текст с учетом HTML-разметки
+                    text = await bot.format_text(text=text, entities=entities)
+
                 await bot.request(
                     "sendMessage",
                     {
                         "chat_id": message_data["target_chat_id"],
-                        "text": message.text or "",
+                        "text": text,
                         "message_thread_id": message_data.get("message_thread_id"),
                         "parse_mode": "HTML"
                     }
