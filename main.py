@@ -54,7 +54,7 @@ async def process_queue():
                     "sendMessage",  # Имя метода Telegram API
                     {
                         "chat_id": message_data["target_chat_id"],
-                        "text": message.html_text or "",
+                        "text": message.text or "",
                         "message_thread_id": message_data.get("message_thread_id"),
                         "parse_mode": "HTML" # Проверяем, есть ли thread_id
                     }
