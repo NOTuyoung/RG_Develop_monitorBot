@@ -51,7 +51,7 @@ async def process_queue():
 
                 await bot.send_message(
                         chat_id = message_data["target_chat_id"],
-                        text = message.text or "",
+                        text = message.html_text or "",
                         message_thread_id = message_data.get("message_thread_id"),
                         parse_mode = "HTML"
                 )
