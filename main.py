@@ -25,6 +25,7 @@ chat_mapping = {
 # Очередь для передачи сообщений
 message_queue = asyncio.Queue()
 
+
 # Обработчик сообщений для Userbot
 @userbot.on_message(filters.chat(list(chat_mapping.keys())) & filters.bot)
 def handle_message(client, message):
@@ -38,6 +39,7 @@ def handle_message(client, message):
         }))
         print(f"Сообщение добавлено в очередь для пересылки из {source_chat_id}")
 
+
 # Функция для обработки очереди сообщений
 async def process_queue():
     while True:
@@ -48,18 +50,21 @@ async def process_queue():
                     chat_id=message_data["source_chat_id"],
                     message_ids=message_data["message_id"]
                 )
-                print(message.html_text)
 
-                await bot.send_message(
-                        chat_id = message_data["target_chat_id"],
-                        text = message.html_text or "",
-                        message_thread_id = message_data.get("message_thread_id"),
-                        parse_mode = "HTML"
+                await bot.request(
+                    "sendMessage",
+                    {
+                        "chat_id": message_data["target_chat_id"],
+                        "text": message.text.html or "",
+                        "parse_mode": "HTML",
+                        "message_thread_id": message_data.get("message_thread_id")
+                    }
                 )
                 print(f"Сообщение переслано в {message_data['target_chat_id']}")
             except Exception as e:
                 print(f"Ошибка при пересылке сообщения: {e}")
         message_queue.task_done()
+
 
 # Запуск Userbot и Bot
 if __name__ == "__main__":
