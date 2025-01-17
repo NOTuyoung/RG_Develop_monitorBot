@@ -50,13 +50,12 @@ async def process_queue():
                     message_ids=message_data["message_id"]
                 )
 
-                await bot.request(
-                    "sendMessage",  # Имя метода Telegram API
+                await bot.request("copyMessage",
                     {
                         "chat_id": message_data["target_chat_id"],
-                        "text": message.text or "",
+                        "from_chat_id": message_data["source_chat_id"],
+                        "message_id": message_data["message_id"],
                         "message_thread_id": message_data.get("message_thread_id"),
-                        "parse_mode": "HTML" # Проверяем, есть ли thread_id
                     }
                 )
                 print(f"Сообщение переслано в {message_data['target_chat_id']}")
